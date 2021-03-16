@@ -2,7 +2,8 @@
 const fs = require("fs");
 const http = require("http");
 const express = require("express")
-const path = require("path")
+const path = require("path");
+const { log } = require("console");
 
 
 // Tells node that we are creating an "express" server
@@ -16,13 +17,60 @@ const PORT = process.env.PORT || 8080;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-//create paths for index.html and notes.html
+//create paths for index.html
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "./public/index.html"))
 })
 
+//create path for notes.html
 app.get("/notes", (req, res) => {
     res.sendFile(path.join(__dirname, "./public/notes.html"))
+})
+
+//display notes from the db folder
+app.get("/api/notes", (req, res) => {
+    fs.readFile("db/db.json", (err, notes) => {
+        if (err) {
+            console.log(err);
+            return
+        }
+        res.json(JSON.parse(notes))
+    })
+})
+
+//post notes to db.json
+app.post("/api/notes", (req, res) => {
+    const note = req.body
+    let notesArray = []
+    fs.readFile(path.join(__dirname, "./db/db.json"), (err, data) => {
+        if (err) {
+            return console.log(err);
+        }
+        if(data === "") {
+            notesArray.push({
+                "id": 1,
+                "title": note.title,
+                "text": note.text,
+            })
+        } else {
+            console.log(data);
+            notesArray = JSON.parse(data)
+            notesArray.push({
+            "id": notesArray.length,
+            "title": notesArray.title,
+            "text": notesArray.text,
+            })
+        }
+        fs.writeFile((path.join(__dirname + "/db/db.json")), JSON.stringify(notesArray), (error) => {
+            if (error) {
+                return console.log(error);
+            }
+            res.join(notesArray)
+        })
+
+    })
+
+    res.status(200).json(req.body)
 })
 
 
