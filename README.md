@@ -53,7 +53,7 @@ THEN I am presented with empty fields to enter a new note title and the note’s
 This application is covered under the Apache license.
 
 ## Tests
-THis application was tested through the local host using server.js, and then deployed to Heroku
+This application was tested through the local host using server.js, and then deployed to Heroku
 
 ### Github
 Visit my Github Profile at https://github.com/jeffgcameron
@@ -62,5 +62,6 @@ Visit my Github Profile at https://github.com/jeffgcameron
 Email me at jeffgcameron@gmail.com for any questions
 
 ### Application Link
-Heroku Link: https://jeffsnotetaker.herokuapp.com/notes
+Heroku Link: https://jeffsnotetaker.herokuapp.com
+
 GitHub Repo: https://github.com/jeffgcameron/NoteTaker
