@@ -1,9 +1,9 @@
 // DEPENDENCIES
 const fs = require("fs");
-const http = require("http");
+// const http = require("http");
 const express = require("express")
 const path = require("path");
-const { log } = require("console");
+// const { log } = require("console");
 
 
 // Tells node that we are creating an "express" server
@@ -17,19 +17,21 @@ const PORT = process.env.PORT || 8080;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.use(express.static(__dirname + '/public'));
+
 //create paths for index.html
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "./public/index.html"))
+    res.sendFile(path.join(__dirname, "/public/index.html"))
 })
 
 //create path for notes.html
-app.get("/notes", (req, res) => {
-    res.sendFile(path.join(__dirname, "./public/notes.html"))
+app.get("/api/notes", (req, res) => {
+    res.sendFile(path.join(__dirname, "/public/notes.html"))
 })
 
 //display notes from the db folder
 app.get("/api/notes", (req, res) => {
-    fs.readFile("db/db.json", (err, notes) => {
+    fs.readFile("/db/db.json", (err, notes) => {
         if (err) {
             console.log(err);
             return
@@ -42,7 +44,7 @@ app.get("/api/notes", (req, res) => {
 app.post("/api/notes", (req, res) => {
     const note = req.body
     let notesArray = []
-    fs.readFile(path.join(__dirname, "./db/db.json"), (err, data) => {
+    fs.readFile(path.join(__dirname, "/db/db.json"), (err, data) => {
         if (err) {
             return console.log(err);
         }
