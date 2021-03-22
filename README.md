@@ -8,9 +8,6 @@ The application’s front end has already been created. It's your job to build t
 
 ## Table of Contents
 
-* [Installation](#installation)
-
-
 * [Usage](#usage)
 
 
@@ -27,10 +24,6 @@ The application’s front end has already been created. It's your job to build t
 
 
 * [Application Link](#application-link)
-
-
-## Installation
-Please install node_modules before using this application.
 
 ## Usage
 ```
@@ -53,7 +46,7 @@ THEN I am presented with empty fields to enter a new note title and the note’s
 This application is covered under the Apache license.
 
 ## Tests
-This application was tested through the local host using server.js, and then deployed to Heroku
+This application was tested through the local host using server.js, and then deployed to Heroku.
 
 ### Github
 Visit my Github Profile at https://github.com/jeffgcameron
