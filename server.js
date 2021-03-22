@@ -1,9 +1,8 @@
 // DEPENDENCIES
 const fs = require("fs");
-// const http = require("http");
 const express = require("express")
 const path = require("path");
-// const { log } = require("console");
+
 
 
 // Tells node that we are creating an "express" server
@@ -42,25 +41,25 @@ app.get("/api/notes", (req, res) => {
 
 //post notes to db.json
 app.post("/api/notes", (req, res) => {
-    const note = req.body
+    const newNote = req.body
     let notesArray = []
     fs.readFile(path.join(__dirname, "db/db.json"), (err, data) => {
         if (err) {
             return console.log(err);
         }
         if(data === "") {
-            notesArray.push({
+            notesArray.push({ 
                 "id": 1,
-                "title": note.title,
-                "text": note.text,
+                "title": newNote.title,
+                "text": newNote.text,
             })
         } else {
             console.log(data);
             notesArray = JSON.parse(data)
             notesArray.push({
-            "id": notesArray.length,
-            "title": notesArray.title,
-            "text": notesArray.text,
+            "id": notesArray.length + 1,
+            "title": newNote.title,
+            "text": newNote.text,
             })
         }
         fs.writeFile((path.join(__dirname + "/db/db.json")), JSON.stringify(notesArray), (error) => {
