@@ -66,7 +66,7 @@ app.post("/api/notes", (req, res) => {
             if (error) {
                 return console.log(error);
             }
-            res.join(notesArray)
+            res.json(notesArray)
         })
 
     })
