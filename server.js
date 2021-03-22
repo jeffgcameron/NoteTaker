@@ -31,7 +31,7 @@ app.get("/notes", (req, res) => {
 
 //display notes from the db folder
 app.get("/api/notes", (req, res) => {
-    fs.readFile("/db/db.json", (err, notes) => {
+    fs.readFile("db/db.json", (err, notes) => {
         if (err) {
             console.log(err);
             return
@@ -44,7 +44,7 @@ app.get("/api/notes", (req, res) => {
 app.post("/api/notes", (req, res) => {
     const note = req.body
     let notesArray = []
-    fs.readFile(path.join(__dirname, "/db/db.json"), (err, data) => {
+    fs.readFile(path.join(__dirname, "db/db.json"), (err, data) => {
         if (err) {
             return console.log(err);
         }
